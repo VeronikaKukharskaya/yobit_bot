@@ -64,7 +64,8 @@ def main():
     # print(get_depth())
     # print(get_depth(coin1="doge"))
     # print(get_depth(coin1="doge", limit=2000))
-    print(get_trades())
+    # print(get_trades())
+    print(get_trades(coin1="xrp"))
 
 
 if __name__ == '__main__':
