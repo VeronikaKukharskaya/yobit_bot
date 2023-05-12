@@ -18,13 +18,26 @@ def get_ticker(coin1="btc", coin2="usd"):
 
     return response.text
 
+
 def get_depth(coin1="btc", coin2="usd", limit=150):
     response = requests.get(url=f"https://yobit.net/api/3/depth/{coin1}_{coin2}?limit={limit}&ignore_invalid=1")
 
     with open("depth.txt", "w") as file:
         file.write(response.text)
 
-    return response.text
+    bids = response.json()[f"{coin1}_usd"]["bids"]
+
+    total_bids_amount = 0
+    for item in bids:
+        price = item[0]
+        coin_amount = item[1]
+
+        total_bids_amount += price * coin_amount
+
+    return f"Total bids: {total_bids_amount} $"
+
+
+
 
 def main():
     # print(get_info())
