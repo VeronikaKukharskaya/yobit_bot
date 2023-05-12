@@ -18,10 +18,19 @@ def get_ticker(coin1="btc", coin2="usd"):
 
     return response.text
 
+def get_depth(coin1="btc", coin2="usd", limit=150):
+    response = requests.get(url=f"https://yobit.net/api/3/depth/{coin1}_{coin2}?limit={limit}&ignore_invalid=1")
+
+    with open("depth.txt", "w") as file:
+        file.write(response.text)
+
+    return response.text
 
 def main():
     # print(get_info())
-    print(get_ticker())
+    # print(get_ticker())
+    # print(get_ticker(coin1="eth"))
+    print(get_depth())
 
 
 if __name__ == '__main__':
